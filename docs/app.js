@@ -616,7 +616,7 @@ function toggleFavorite(x){
   const key=favoriteKey(x);
   if(isFavorite(x)) localStorage.removeItem(key);
   else localStorage.setItem(key,"1");
-  if(!home.classList.contains("hidden")) renderPoems(document.querySelector('#homeList'),classData['1']||[]);
+  if(!home.classList.contains("hidden")) showHome();
   else render();
 }
 
@@ -1669,8 +1669,7 @@ async function initializeCloudSync() {
     items = classData[1] || [];
 
     if (!home.classList.contains("hidden")) {
-      document.querySelector("#homeClassCount").textContent = poemCountText(1);
-      renderPoems(document.querySelector("#homeList"), classData["1"] || []);
+      showHome();
     } else {
       render();
     }

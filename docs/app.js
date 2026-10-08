@@ -632,12 +632,13 @@ function renderContents(){
   }
 
   wrap.innerHTML=`<table class="contents-table">
-    <thead><tr><th>নং</th><th>কবিতার নাম</th><th>কবি</th></tr></thead>
+    <thead><tr><th>নং</th><th>কবিতার নাম</th><th>কবি</th><th>কবিতার ধরন</th></tr></thead>
     <tbody>${poems.map(function(poem,i){
       return `<tr data-class="${poem.class}" data-index="${(classData[String(poem.class)]||[]).indexOf(poem)}">
         <td>${toBanglaNumber(i+1)}</td>
         <td>${poem.title || "নাম নেই"}</td>
         <td>${poem.poet || "—"}</td>
+        <td>${poem.oldBook ? "পুরোনো কবিতা" : ""}</td>
       </tr>`;
     }).join("")}</tbody>
   </table>`;

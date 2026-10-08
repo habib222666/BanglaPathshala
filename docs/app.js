@@ -194,16 +194,97 @@ document.querySelectorAll("#richToolbar [data-cmd]").forEach(button => {
   });
 });
 
+
 // Font size
 const fontSizeSelect = document.querySelector("#fontSize");
 
+// Font Style
+const fontFamilySelect = document.querySelector("#fontFamily");
+
+if(fontFamilySelect){
+  fontFamilySelect.addEventListener("change", function(){
+    const editor = document.querySelector("#editText");
+    if(!editor) return;
+
+    editor.focus();
+
+    document.execCommand(
+      "fontName",
+      false,
+      this.value
+    );
+  });
+}
+
+// Exact Font Size in pt
 if(fontSizeSelect){
   fontSizeSelect.addEventListener("change", function(){
     const editor = document.querySelector("#editText");
     if(!editor) return;
 
     editor.focus();
-    document.execCommand("fontSize", false, this.value);
+
+    document.execCommand("fontSize", false, "7");
+
+    editor.querySelectorAll('font[size="7"]').forEach(font => {
+      const span = document.createElement("span");
+      span.style.fontSize = this.value + "pt";
+      span.innerHTML = font.innerHTML;
+      font.replaceWith(span);
+    });
+  });
+}
+
+// Leading / Line Spacing
+const leadingSelect = document.querySelector("#leading");
+
+if(leadingSelect){
+  leadingSelect.addEventListener("change", function(){
+    const editor = document.querySelector("#editText");
+    if(!editor) return;
+
+    editor.focus();
+
+    const selection = window.getSelection();
+
+    if(!selection || !selection.rangeCount){
+      editor.style.lineHeight = this.value;
+      return;
+    }
+
+    let node = selection.anchorNode;
+
+    if(node && node.nodeType === Node.TEXT_NODE){
+      node = node.parentElement;
+    }
+
+    const block = node && node.closest
+      ? node.closest("p, div, h1, h2, h3, h4, h5, h6, li")
+      : null;
+
+    if(block && editor.contains(block)){
+      block.style.lineHeight = this.value;
+    }else{
+      editor.style.lineHeight = this.value;
+    }
+  });
+}
+
+// Font Color
+const fontColor = document.querySelector("#fontColor");
+
+if(fontColor){
+  fontColor.addEventListener("input", function(){
+    const editor = document.querySelector("#editText");
+    if(!editor) return;
+
+    editor.focus();
+
+    document.execCommand(
+      "foreColor",
+      false,
+      this.value
+    );
   });
 }
 

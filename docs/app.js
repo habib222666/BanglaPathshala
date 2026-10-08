@@ -572,6 +572,27 @@ function poemCardColor(x, i){
   return "#" + [r,g,b].map(tint).map(v=>v.toString(16).padStart(2,"0")).join("");
 }
 
+function poemCardExcerpt(x){
+  const raw = savedText(x) || x.text || "";
+  const temp = document.createElement("div");
+  temp.innerHTML = raw;
+
+  const text = (temp.innerText || temp.textContent || raw)
+    .replace(/\r/g, "")
+    .trim();
+
+  if(!text) return "";
+
+  const lines = text
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean);
+
+  const preview = lines.slice(0, 3).join("\n");
+
+  return preview.length < text.length ? preview + " …" : preview;
+}
+
 function poemCardHTML(x, i){
   const image = x.image ? `<img src="${x.image}" alt="" onerror="this.style.display='none'">` : "📚";
   const realIndex=(classData[String(x.class)]||[]).indexOf(x);
@@ -584,6 +605,7 @@ function poemCardHTML(x, i){
     ${x.oldBook ? `<div class="old-book-label">📚 পুরোনো কবিতা</div>` : ""}
     <div class="card-illustration">${image}</div>
     <h3 style="color:${titleColor} !important;">${x.title}</h3>
+    <div class="excerpt">${poemCardExcerpt(x).replace(/\n/g, "<br>")}</div>
     <div class="poet" style="color:${poetColor} !important;">${x.poet || "উল্লেখ নেই"}</div>
     ${globalSearchMode ? `<div class="global-class-label">শ্রেণি: ${classNames[Number(x.class)] || x.class}</div>` : ""}
 

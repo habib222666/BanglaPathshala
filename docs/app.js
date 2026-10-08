@@ -661,22 +661,30 @@ function poemCardExcerpt(x){
   const temp = document.createElement("div");
   temp.innerHTML = raw;
 
-  const text = (temp.innerText || temp.textContent || raw)
-    .replace(/\r/g, "")
-    .trim();
+  if(!temp.textContent.trim()) return "";
 
-  if(!text) return "";
+  const blocks = [...temp.children];
 
-  const lines = text
-    .split("\n")
-    .map(line => line.trim())
-    .filter(Boolean);
+  if(!blocks.length){
+    return temp.textContent
+      .replace(/\\r/g, "")
+      .trim()
+      .split("\\n")
+      .slice(0, 3)
+      .join("<br>");
+  }
 
-  const preview = lines.slice(0, 3).join("\n");
+  const previewBox = document.createElement("div");
 
-  return preview.length < text.length ? preview + " …" : preview;
+  blocks.slice(0, 3).forEach(block => {
+    const clone = block.cloneNode(true);
+    previewBox.appendChild(clone);
+  });
+
+  const hasMore = blocks.length > 3;
+
+  return previewBox.innerHTML + (hasMore ? " …" : "");
 }
-
 function poemCardHTML(x, i){
   const image = x.image ? `<img src="${x.image}" alt="" onerror="this.style.display='none'">` : "📚";
   const realIndex=(classData[String(x.class)]||[]).indexOf(x);

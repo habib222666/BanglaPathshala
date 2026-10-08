@@ -434,7 +434,7 @@ function poemCardHTML(x, i){
     <h3 style="color:${titleColor} !important;">${x.title}</h3>
     <div class="poet" style="color:${poetColor} !important;">${x.poet || "উল্লেখ নেই"}</div>
     ${globalSearchMode ? `<div class="global-class-label">শ্রেণি: ${classNames[Number(x.class)] || x.class}</div>` : ""}
-    <div class="excerpt">${savedText(x)}</div>
+
   </div>`;
 }
 

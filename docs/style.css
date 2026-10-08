@@ -1,10 +1,19 @@
 @font-face{
-  font-family:"SolaimanLipi";
-  src:url("./fonts/SolaimanLipi.ttf") format("truetype");
+  font-family:"TeeshtaMJ-Regular";
+  src:url("./fonts/TeeshtaMJ-Regular.otf") format("opentype");
   font-weight:400;
   font-style:normal;
   font-display:block;
 }
+
+@font-face{
+  font-family:"TeeshtaMJ-Bold";
+  src:url("./fonts/TeeshtaMJ-Bold.otf") format("opentype");
+  font-weight:700;
+  font-style:normal;
+  font-display:block;
+}
+
 
 *{box-sizing:border-box}
 :root{
@@ -1456,8 +1465,11 @@ body.dark .paper h1 {
 
 /* SOLAIMANLIPI-FORCE */
 .card h3,
+.paper h1{
+  font-family:"TeeshtaMJ-Bold" !important;
+}
+
 .card .poet,
-.paper h1,
 .paper #poet{
-  font-family:"SolaimanLipi" !important;
+  font-family:"TeeshtaMJ-Regular" !important;
 }

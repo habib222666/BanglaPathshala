@@ -1588,3 +1588,64 @@ body.dark .nav-section-title{
     max-width:none;
   }
 }
+
+/* Fix desktop portrait overlap */
+@media (min-width:769px){
+  .topbar{
+    height:96px !important;
+    padding:0 20px !important;
+  }
+
+  .brand-logo{
+    width:56px !important;
+    height:56px !important;
+  }
+
+  .brand-logo .book{
+    font-size:42px !important;
+  }
+
+  .brand-name{
+    font-size:26px !important;
+  }
+
+  .brand-tagline{
+    font-size:12px !important;
+  }
+
+  .top-actions{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-end !important;
+    gap:8px !important;
+  }
+
+  .top-action-row{
+    gap:16px !important;
+  }
+
+  .top-search-row{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .app-shell{
+    min-height:calc(100vh - 96px) !important;
+  }
+
+  .side-nav{
+    padding:10px 8px !important;
+  }
+
+  .nav-classes{
+    flex-wrap:wrap !important;
+    overflow:visible !important;
+    gap:4px !important;
+  }
+
+  .nav-class{
+    width:calc(20% - 4px) !important;
+    white-space:normal !important;
+    padding:8px 2px !important;
+  }
+}

@@ -1488,6 +1488,27 @@ body.dark .nav-section-title{
 }
 
 
+/* Force phone-style layout inside desktop portrait frame */
+@media (min-width: 769px){
+  .brand-logo{width:46px !important;height:46px !important}
+  .brand-logo .book{font-size:36px !important}
+  .brand-logo .leaf{font-size:18px !important;top:0 !important}
+  .brand-name{font-size:23px !important}
+  .brand-tagline{font-size:11px !important}
+  .top-actions{gap:4px !important}
+  .top-action span{font-size:27px !important;line-height:25px !important}
+  .top-action small{font-size:10px !important}
+  .side-nav{display:flex !important;gap:4px !important;overflow-x:auto !important;padding:7px 8px !important}
+  .nav-item{width:auto !important;white-space:nowrap !important;padding:8px 11px !important;font-size:14px !important;gap:5px !important}
+  .nav-item .nav-icon{font-size:20px !important;width:auto !important}
+  .nav-classes{display:flex !important;flex-wrap:nowrap !important;gap:4px !important;overflow-x:auto !important;margin:0 !important}
+  .nav-class{width:auto !important;white-space:nowrap !important;padding:8px 10px !important;font-size:13px !important;gap:5px !important}
+  .nav-class .nav-icon{font-size:16px !important;display:inline-block !important}
+  .sidebar-art{display:none !important}
+  .content{padding:12px 10px 30px !important}
+  .dashboard{max-width:none !important}
+}
+
 /* Desktop Web: phone portrait view */
 @media (min-width: 769px){
   body{
@@ -1495,16 +1516,17 @@ body.dark .nav-section-title{
   }
 
   .topbar{
-    width:400px;
-    margin:0 auto;
-    padding:0 16px;
+    width:400px !important;
+    margin:0 auto !important;
+    padding:0 13px !important;
+    height:78px !important;
   }
 
   .app-shell{
-    width:400px;
-    margin:0 auto;
-    display:block;
-    min-height:calc(100vh - 96px);
+    width:400px !important;
+    margin:0 auto !important;
+    display:block !important;
+    min-height:calc(100vh - 78px) !important;
   }
 
   .sidebar{

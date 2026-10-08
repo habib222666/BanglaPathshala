@@ -726,7 +726,7 @@ function show(x){
   document.querySelector("#title").textContent=x.title;
 
   document.querySelector("#poet").textContent=
-    x.poet ? `কবি: ${x.poet}` : "";
+    x.poet ? x.poet : "";
 
   const poemTextEl = document.querySelector("#text");
   poemTextEl.textContent = savedText(x);

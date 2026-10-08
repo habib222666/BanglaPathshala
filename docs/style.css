@@ -1473,3 +1473,96 @@ body.dark .paper h1 {
 .paper #poet{
   font-family:"TeeshtaMJ-Regular" !important;
 }
+
+/* All Class navigation heading */
+.nav-section-title{
+  margin:14px 12px 6px;
+  font-size:13px;
+  font-weight:700;
+  color:#6b7280;
+  letter-spacing:.3px;
+}
+
+body.dark .nav-section-title{
+  color:#cbd5e1;
+}
+
+
+/* Desktop Web: phone portrait view */
+@media (min-width: 769px){
+  body{
+    background:#e5e7eb;
+  }
+
+  .topbar{
+    width:400px;
+    margin:0 auto;
+    padding:0 16px;
+  }
+
+  .app-shell{
+    width:400px;
+    margin:0 auto;
+    display:block;
+    min-height:calc(100vh - 96px);
+  }
+
+  .sidebar{
+    width:100%;
+    height:auto;
+    position:static;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+    display:block;
+  }
+
+  .side-nav{
+    padding:10px 8px;
+  }
+
+  .nav-item{
+    width:auto;
+    display:inline-flex;
+    padding:8px 11px;
+    margin:2px;
+    font-size:14px;
+    gap:5px;
+  }
+
+  .nav-item .nav-icon{
+    font-size:20px;
+    width:auto;
+  }
+
+  .nav-classes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px;
+    margin:4px 0;
+  }
+
+  .nav-class{
+    width:calc(20% - 4px);
+    justify-content:center;
+    padding:8px 2px;
+    font-size:11px;
+    gap:2px;
+    text-align:center;
+  }
+
+  .nav-class .nav-icon{
+    display:none;
+  }
+
+  .sidebar-art{
+    display:none;
+  }
+
+  .content{
+    padding:12px 10px 30px;
+  }
+
+  .dashboard{
+    max-width:none;
+  }
+}

@@ -688,9 +688,11 @@ function poemCardHTML(x, i){
     ${VIEWER_MODE ? "" : `<button class="deleteUserPoem" data-index="${realIndex}" data-class="${x.class}" type="button" onclick="event.preventDefault();event.stopPropagation();deleteUserPoem(this.dataset.class,this.dataset.index);return false;">🗑</button>`}
     ${x.oldBook ? `<div class="old-book-label">📚 পুরোনো কবিতা</div>` : ""}
     <div class="card-illustration">${image}</div>
-    <h3 style="color:${titleColor} !important;">${x.title}</h3>
+    <h3 style="color:${titleColor} !important;font-family:'SolaimanLipi',sans-serif;">${x.title}</h3>
+    <div class="poet" style="color:${poetColor} !important;font-family:'SolaimanLipi',sans-serif;">${x.poet || "উল্লেখ নেই"}</div>
+
     <div class="excerpt">${poemCardExcerpt(x).replace(/\n/g, "<br>")}</div>
-    <div class="poet" style="color:${poetColor} !important;">${x.poet || "উল্লেখ নেই"}</div>
+
     ${globalSearchMode ? `<div class="global-class-label">শ্রেণি: ${classNames[Number(x.class)] || x.class}</div>` : ""}
 
   </div>`;

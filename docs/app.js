@@ -422,6 +422,9 @@ if(editBtn){
 
     if(!editor) return;
 
+    editor.style.fontFamily =
+      '"Nirmala UI","Noto Sans Bengali",sans-serif';
+
     const existing = savedText(currentPoem);
 
     /*
@@ -985,6 +988,10 @@ function show(x){
 
   const poemTextEl = document.querySelector("#text");
   const displayText = savedText(x);
+
+  poemTextEl.style.fontFamily =
+    '"Nirmala UI","Noto Sans Bengali",sans-serif';
+
   poemTextEl.innerHTML =
     /<[^>]+>/.test(displayText)
       ? displayText

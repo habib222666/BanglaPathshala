@@ -79,7 +79,7 @@ button{cursor:pointer}
 .reader-view{max-width:900px;margin:0 auto}
 .reader-actions{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}
 .paper{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px 32px;box-shadow:0 8px 24px rgba(39,65,100,.07)}
-.paper h1{text-align:center;color:#1747a6;font-size:34px;margin:8px 0}.paper #poet{text-align:center;margin:0 0 24px}.paper pre{white-space:pre-wrap;font-family:"Noto Sans Bengali",sans-serif;font-size:19px;line-height:1.9;margin:0;color:#172338}
+.paper h1{text-align:center;color:#1747a6;font-size:34px;margin:8px 0}.paper #poet{text-align:center;margin:0 0 24px}.paper pre{white-space:pre-wrap;font-family:"Nirmala UI","Noto Sans Bengali",sans-serif;font-size:19px;line-height:1.9;margin:0;color:#172338}
 .recite-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.recite-controls button{border:0;border-radius:16px;padding:9px 12px;background:#eef5ff;color:#245da1}
 .richToolbar{
   display:flex;

@@ -81,6 +81,76 @@ button{cursor:pointer}
 .paper{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px 32px;box-shadow:0 8px 24px rgba(39,65,100,.07)}
 .paper h1{text-align:center;color:#1747a6;font-size:34px;margin:8px 0}.paper #poet{text-align:center;margin:0 0 24px}.paper pre{white-space:pre-wrap;font-family:"Noto Sans Bengali",sans-serif;font-size:19px;line-height:1.9;margin:0;color:#172338}
 .recite-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.recite-controls button{border:0;border-radius:16px;padding:9px 12px;background:#eef5ff;color:#245da1}
+.richToolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  padding:10px;
+  margin-bottom:8px;
+  background:#f5f8fc;
+  border:1px solid #dce5ef;
+  border-radius:14px;
+  align-items:center;
+}
+
+.richToolbar button,
+.richToolbar select{
+  border:1px solid #d5deea;
+  background:#fff;
+  color:#24364d;
+  border-radius:9px;
+  min-height:34px;
+  padding:5px 9px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.richToolbar button:hover{
+  background:#eef5ff;
+}
+
+#editText{
+  width:100%;
+  min-height:300px;
+  box-sizing:border-box;
+  border:1px solid #dce5ef;
+  border-radius:16px;
+  padding:14px;
+  line-height:1.8;
+  resize:vertical;
+  background:#fff;
+  color:#172338;
+  font-family:"Noto Sans Bengali",sans-serif;
+  font-size:19px;
+  outline:none;
+  overflow:auto;
+}
+
+#editText:focus{
+  border-color:#6d9ee8;
+  box-shadow:0 0 0 3px rgba(66,133,244,.10);
+}
+
+#editText p{
+  margin:0 0 10px;
+}
+
+#editText h2{
+  margin:12px 0 8px;
+  font-size:28px;
+}
+
+#editText h3{
+  margin:10px 0 6px;
+  font-size:23px;
+}
+
+#editText ul,
+#editText ol{
+  margin:8px 0;
+  padding-left:28px;
+}
+
 #editText{width:100%;min-height:300px;border:1px solid #dce5ef;border-radius:16px;padding:14px;line-height:1.8;resize:vertical}.editActions{display:flex;gap:10px;margin-top:10px}.editActions button{flex:1;border:0;border-radius:14px;padding:11px}.editActions #saveBtn{background:#e2f7e7;color:#28713d}.editActions #cancelBtn{background:#f4f4f4;color:#555}
 .empty{grid-column:1/-1;background:#fff;border:1px dashed #d9e2ed;border-radius:20px;padding:35px;text-align:center;color:#718096}
 .muted{color:#687991;font-size:15px}

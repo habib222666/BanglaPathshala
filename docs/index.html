@@ -104,7 +104,43 @@
           <div id="poet" class="muted"></div>
           <pre id="text"></pre>
           <div id="editArea" class="hidden">
-            <textarea id="editText"></textarea>
+            <div class="richToolbar" id="richToolbar">
+              <select id="formatBlock" title="Paragraph">
+                <option value="p">Paragraph</option>
+                <option value="h2">Heading</option>
+                <option value="h3">Sub Heading</option>
+              </select>
+
+              <select id="fontSize" title="Font Size">
+                <option value="2">ছোট</option>
+                <option value="3" selected>মাঝারি</option>
+                <option value="4">বড়</option>
+                <option value="5">আরও বড়</option>
+                <option value="6">বিশেষ বড়</option>
+              </select>
+
+              <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+              <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+              <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
+
+              <button type="button" data-cmd="justifyLeft" title="Left">☰</button>
+              <button type="button" data-cmd="justifyCenter" title="Center">≡</button>
+              <button type="button" data-cmd="justifyRight" title="Right">☷</button>
+
+              <button type="button" data-cmd="insertUnorderedList" title="Bullet List">• List</button>
+              <button type="button" data-cmd="insertOrderedList" title="Number List">1. List</button>
+
+              <button type="button" id="clearFormat" title="Clear Formatting">Tx</button>
+            </div>
+
+            <div
+              id="editText"
+              contenteditable="true"
+              spellcheck="false"
+              role="textbox"
+              aria-multiline="true"
+            ></div>
+
             <div class="editActions">
               <button id="saveBtn" type="button">💾 সংরক্ষণ করুন</button>
               <button id="cancelBtn" type="button">↩ বাতিল</button>

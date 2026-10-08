@@ -139,16 +139,127 @@ const saveBtn=document.querySelector("#saveBtn");
 
 const cancelBtn=document.querySelector("#cancelBtn");
 
+// ===== Rich Text Editor =====
+
+function richEditorPlainText(){
+  const el = document.querySelector("#editText");
+  return el ? el.innerText.trim() : "";
+}
+
+function cleanRichHTML(html){
+  const temp = document.createElement("div");
+  temp.innerHTML = html || "";
+
+  temp.querySelectorAll("script,style,iframe,object,embed").forEach(el => el.remove());
+
+  temp.querySelectorAll("*").forEach(el => {
+    [...el.attributes].forEach(attr => {
+      const name = attr.name.toLowerCase();
+      const value = attr.value || "";
+
+      if(name.startsWith("on")){
+        el.removeAttribute(attr.name);
+      }
+
+      if(name === "href" || name === "src"){
+        if(/^\s*javascript:/i.test(value)){
+          el.removeAttribute(attr.name);
+        }
+      }
+    });
+  });
+
+  return temp.innerHTML.trim();
+}
+
+function poemHTMLToPlainText(value){
+  if(!value) return "";
+
+  const temp = document.createElement("div");
+  temp.innerHTML = value;
+
+  return (temp.innerText || temp.textContent || "")
+    .replace(/\u00a0/g, " ")
+    .trim();
+}
+
+// Toolbar buttons
+document.querySelectorAll("#richToolbar [data-cmd]").forEach(button => {
+  button.addEventListener("click", function(){
+    const editor = document.querySelector("#editText");
+    if(!editor) return;
+
+    editor.focus();
+    document.execCommand(this.dataset.cmd, false, null);
+  });
+});
+
+// Font size
+const fontSizeSelect = document.querySelector("#fontSize");
+
+if(fontSizeSelect){
+  fontSizeSelect.addEventListener("change", function(){
+    const editor = document.querySelector("#editText");
+    if(!editor) return;
+
+    editor.focus();
+    document.execCommand("fontSize", false, this.value);
+  });
+}
+
+// Paragraph / Heading
+const formatBlock = document.querySelector("#formatBlock");
+
+if(formatBlock){
+  formatBlock.addEventListener("change", function(){
+    const editor = document.querySelector("#editText");
+    if(!editor) return;
+
+    editor.focus();
+
+    const tag = this.value;
+
+    document.execCommand(
+      "formatBlock",
+      false,
+      tag
+    );
+  });
+}
+
+// Clear formatting
+const clearFormat = document.querySelector("#clearFormat");
+
+if(clearFormat){
+  clearFormat.addEventListener("click", function(){
+    const editor = document.querySelector("#editText");
+    if(!editor) return;
+
+    editor.focus();
+    document.execCommand("removeFormat", false, null);
+  });
+}
+
+// Save rich text
 if(saveBtn){
+
   saveBtn.addEventListener("click", async function(){
+
     if(VIEWER_MODE){
       return;
     }
+
     if(!currentPoem) return;
 
-    const newText = editText.value.trim();
+    const editor = document.querySelector("#editText");
 
-    if(!newText){
+    if(!editor){
+      return;
+    }
+
+    const plainText = richEditorPlainText();
+
+    if(!plainText){
       alert("কবিতার লেখা খালি রাখা যাবে না।");
       return;
     }
@@ -158,9 +269,12 @@ if(saveBtn){
       return;
     }
 
+    const richHTML = cleanRichHTML(editor.innerHTML);
+
     saveBtn.disabled = true;
 
     try{
+
       await supabaseRequest(
         "poems?id=eq." + encodeURIComponent(currentPoem.id),
         {
@@ -169,15 +283,16 @@ if(saveBtn){
             "Prefer": "return=representation"
           },
           body: JSON.stringify({
-            text: newText
+            text: richHTML
           })
         }
       );
 
-      currentPoem.text = newText;
+      currentPoem.text = richHTML;
 
-      document.querySelector("#text").textContent = newText;
+      document.querySelector("#text").innerHTML = richHTML;
       document.querySelector("#text").classList.remove("hidden");
+
       editArea.classList.add("hidden");
       editBtn.classList.remove("hidden");
 
@@ -186,33 +301,70 @@ if(saveBtn){
       render();
 
     } catch(error){
+
       console.error("Poem update failed:", error);
       alert("কবিতা সংরক্ষণ করা যায়নি।");
+
     } finally {
+
       saveBtn.disabled = false;
+
     }
   });
 }
 
 if(cancelBtn){
+
   cancelBtn.addEventListener("click", function(){
+
     editArea.classList.add("hidden");
+
     document.querySelector("#text").classList.remove("hidden");
+
     editBtn.classList.remove("hidden");
+
   });
+
 }
 
 if(editBtn){
+
   editBtn.addEventListener("click", function(){
+
     if(VIEWER_MODE){
       return;
     }
+
     if(!currentPoem) return;
-    editText.value = savedText(currentPoem);
+
+    const editor = document.querySelector("#editText");
+
+    if(!editor) return;
+
+    const existing = savedText(currentPoem);
+
+    /*
+      পুরোনো কবিতা যদি plain text হয়,
+      তাহলে সেটাকে paragraph/line break সহ editor-এ নেওয়া হবে।
+      আর আগে থেকে HTML formatting থাকলে সেটাই রাখা হবে।
+    */
+    if(/<[^>]+>/.test(existing)){
+      editor.innerHTML = existing;
+    }else{
+      editor.innerHTML = existing
+        .split(/\n{2,}/)
+        .map(paragraph => `<p>${paragraph.replace(/\n/g,"<br>")}</p>`)
+        .join("");
+    }
+
     editArea.classList.remove("hidden");
+
     document.querySelector("#text").classList.add("hidden");
+
     editBtn.classList.add("hidden");
+
   });
+
 }
 
 // ===== Search + Favorite Filter =====
@@ -729,7 +881,11 @@ function show(x){
     x.poet ? x.poet : "";
 
   const poemTextEl = document.querySelector("#text");
-  poemTextEl.textContent = savedText(x);
+  const displayText = savedText(x);
+  poemTextEl.innerHTML =
+    /<[^>]+>/.test(displayText)
+      ? displayText
+      : displayText.replace(/\\n/g, "<br>");
 
   editArea.classList.add("hidden");
   document.querySelector("#text").classList.remove("hidden");

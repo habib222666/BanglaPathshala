@@ -776,9 +776,11 @@ function buildClassNav(){
 }
 function updateNav(c){
 
-  const classes = Array.isArray(c) ? c.map(Number) : [Number(c)];
-  selectedClasses = classes;
+  const classes = c == null
+    ? []
+    : (Array.isArray(c) ? c.map(Number) : [Number(c)]);
 
+  selectedClasses = classes;
 
   document.querySelectorAll('.nav-class').forEach(b => {
 
@@ -857,15 +859,27 @@ function openClass(c){
 
 }
 function showHome(){
+
   document.querySelector("#contents")?.classList.add("hidden");
 
   home.classList.remove('hidden');
+
   library.classList.add('hidden');
+
   reader.classList.add('hidden');
-  document.querySelector('#homeClassTitle').textContent=`${classNames[1]} শ্রেণি`;
-  document.querySelector('#homeClassCount').textContent=poemCountText(1);
-  renderPoems(document.querySelector('#homeList'),classData['1']||[]);
-  updateNav(1);
+
+  document.querySelector('#homeClassTitle').textContent="বাংলা পাঠশালা";
+
+  document.querySelector('#homeClassCount').textContent="শ্রেণি নির্বাচন করুন";
+
+  const homeList = document.querySelector('#homeList');
+
+  if(homeList){
+    homeList.innerHTML='<div class="empty">উপরের All Class থেকে একটি শ্রেণি নির্বাচন করুন।</div>';
+  }
+
+  updateNav(null);
+
 }
 
 
